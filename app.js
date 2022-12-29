@@ -1,4 +1,37 @@
-const myLibrary = [];
+const modal = document.getElementById("modal");
+const span = document.getElementsByClassName("close")[0];
+const shelf = document.getElementsByClassName("shelf")[0];
+
+function openModal() {
+  modal.style.display = "block";
+}
+
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+const myLibrary = [
+  {
+    title: "The Hobbit",
+    author: "Tolkien",
+    pages: 354,
+  },
+  {
+    title: "Harry Potter",
+    author: "Rowling",
+    pages: 476,
+  },
+];
+
+myLibrary.forEach(book => {
+  
+}
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -18,7 +51,7 @@ function Book(title, author, pages, read) {
 //   "not read yet"
 // );
 
-function addBookToLibrary() {
-    
-    const
-}
+// function addBookToLibrary() {
+
+//     const
+// }
