@@ -1,6 +1,7 @@
 const modal = document.getElementById("modal");
 const span = document.getElementsByClassName("close")[0];
 const shelf = document.getElementsByClassName("shelf")[0];
+const form = document.getElementById("book-form");
 
 function openModal() {
   modal.style.display = "block";
@@ -68,35 +69,17 @@ const myLibrary = [
     author: "Radom",
     pages: 56,
   },
-  {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
-  },
-  {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
-  },
-  {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
-  },
-  {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
-  },
-  {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
-  },
 ];
 
-myLibrary.forEach((book) => {
+function Book(title, author, pages) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+}
+
+function addingBook() {
   const newBook = document.createElement("div");
+
   const newBookTitle = document.createElement("div");
   newBookTitle.classList.add("spine-title");
   const newBookAuthor = document.createElement("div");
@@ -104,33 +87,52 @@ myLibrary.forEach((book) => {
   const newBookPages = document.createElement("div");
   newBookPages.classList.add("spine-pages");
 
-  newBookTitle.textContent = book.title;
-  newBookAuthor.textContent = book.author;
-  newBookPages.textContent = `${book.pages}p`;
+  newBookTitle.textContent = myLibrary[0].title;
+  newBookAuthor.textContent = myLibrary[0].author;
+  newBookPages.textContent = `${myLibrary[0].pages}p`;
+
   newBook.append(newBookTitle, newBookAuthor, newBookPages);
   newBook.classList.add("books");
   shelf.insertAdjacentElement("afterbegin", newBook);
-});
-
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
 }
 
-// Book.prototype.info = function () {
-//   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-// };
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formBookTitle = event.currentTarget.title.value;
+  console.log(event.currentTarget.title.value);
+  const formBookAuthor = event.currentTarget.author.value;
+  console.log(event.currentTarget.author.value);
 
-// const theHobbit = new Book(
-//   "The Hobbit",
-//   "J.R.R. Tolkien",
-//   "295",
-//   "not read yet"
-// );
+  const formBookPages = event.currentTarget.pages.value;
+  console.log(event.currentTarget.pages.value);
 
-// function addBookToLibrary() {
+  const addbook = new Book(formBookTitle, formBookAuthor, formBookPages);
+  console.log(addbook);
+  myLibrary.unshift(addbook);
+  addingBook();
+});
 
-//     const
-// }
+// Fake books in array for landing page
+
+function addingFakeBeginningBooks() {
+  myLibrary.forEach((book) => {
+    const newBook = document.createElement("div");
+
+    const newBookTitle = document.createElement("div");
+    newBookTitle.classList.add("spine-title");
+    const newBookAuthor = document.createElement("div");
+    newBookAuthor.classList.add("spine-author");
+    const newBookPages = document.createElement("div");
+    newBookPages.classList.add("spine-pages");
+
+    newBookTitle.textContent = book.title;
+    newBookAuthor.textContent = book.author;
+    newBookPages.textContent = `${book.pages}p`;
+
+    newBook.append(newBookTitle, newBookAuthor, newBookPages);
+    newBook.classList.add("books");
+    shelf.insertAdjacentElement("afterbegin", newBook);
+  });
+}
+
+addingFakeBeginningBooks();

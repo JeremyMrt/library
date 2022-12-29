@@ -29,7 +29,7 @@
       <div class="modal-content">
         <h2>Add a book</h2>
         <span class="close">X</span>
-        <form action="" method="get" class="book-form">
+        <form action="" method="post" id="book-form">
           <div class="book-title">
             <label for="title">Title</label>
             <input
@@ -37,6 +37,7 @@
               name="title"
               id="title"
               placeholder="The Hobbit"
+              value="test title"
             />
           </div>
           <div class="book-author">
@@ -45,15 +46,22 @@
               type="text"
               name="author"
               id="author"
+              value="test"
               placeholder="J.R.R. Tolkien"
             />
           </div>
           <div class="book-pages">
             <label for="pages"># Pages</label>
-            <input type="number" name="pages" id="pages" placeholder="354" />
+            <input
+              type="number"
+              value="50"
+              name="pages"
+              id="pages"
+              placeholder="354"
+            />
           </div>
           <div class="submit-btn">
-            <button type="submit">Add</button>
+            <button type="submit" id="submit">Add</button>
           </div>
         </form>
       </div>

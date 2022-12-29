@@ -62,29 +62,33 @@ body {
   width: 80%;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  border: 2px solid green;
+  gap: 10px;
 }
 
 .books {
   position: relative;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   border: 2px solid black;
   height: 280px;
   width: 50px;
+  padding: 5px 0;
   writing-mode: vertical-lr;
   font-weight: 700;
-  background-color: #aaa;
+  background-color: rgba(14, 10, 10, 0.767);
+  transition: transform 400ms ease;
+  color: goldenrod;
 }
 
-.spine-title {
-  margin-left: 10px;
+.books:hover {
+  transform: translateY(-30px) scale(1.1);
+  cursor: pointer;
 }
 
-.spine-author {
-  position: absolute;
-  margin-left: 10px;
-  bottom: 0;
+.spine-pages {
+  margin-left: 8px;
+  margin-top: 30px;
 }
 
 .text-content {
@@ -166,7 +170,7 @@ h1 {
   cursor: pointer;
 }
 
-.book-form {
+#book-form {
   grid-column: 2 / 3;
   display: grid;
   grid-template-columns: 1fr;
@@ -181,7 +185,7 @@ h1 {
   flex-direction: column;
 }
 
-.book-form input {
+#book-form input {
   height: 50px;
   font-size: 1.2rem;
   width: 90%;
@@ -190,7 +194,7 @@ h1 {
   align-self: start;
 }
 
-.book-form input::placeholder {
+#book-form input::placeholder {
   color: rgba(128, 128, 128, 0.521);
 }
 
