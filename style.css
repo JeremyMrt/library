@@ -52,12 +52,44 @@ body {
 .bookshelf {
   height: 100%;
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shelf {
+  height: 80%;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  border: 2px solid green;
+}
+
+.books {
+  position: relative;
+  display: flex;
+  border: 2px solid black;
+  height: 280px;
+  width: 50px;
+  writing-mode: vertical-lr;
+  font-weight: 700;
+  background-color: #aaa;
+}
+
+.spine-title {
+  margin-left: 10px;
+}
+
+.spine-author {
+  position: absolute;
+  margin-left: 10px;
+  bottom: 0;
 }
 
 .text-content {
   align-self: center;
-  height: 95vh;
-  border-radius: 20px;
+  height: 100%;
   padding: 2vmax;
   background-color: white;
   box-shadow: 0px 0px 80px -20px black;
