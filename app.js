@@ -1,20 +1,16 @@
 const modal = document.getElementById("modal");
 const span = document.getElementsByClassName("close")[0];
-const shelf = document.getElementsByClassName("shelf")[0];
+const unreadShelf = document.getElementsByClassName("unread")[0];
+const readShelf = document.getElementsByClassName("read")[0];
 const form = document.getElementById("book-form");
 
+// eslint-disable-next-line no-unused-vars
 function openModal() {
-  modal.style.display = "block";
+  modal.style.display = "flex";
 }
 
 span.onclick = function () {
   modal.style.display = "none";
-};
-
-window.onclick = function (event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
 };
 
 window.addEventListener("keydown", (e) => {
@@ -35,39 +31,24 @@ const myLibrary = [
     pages: 476,
   },
   {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
+    title: "50 shades",
+    author: "James",
+    pages: 560,
   },
   {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
+    title: "The Alchemist",
+    author: "Coelho",
+    pages: 556,
   },
   {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
+    title: "JS for Dummies",
+    author: "Not a dummy",
+    pages: 1,
   },
   {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
-  },
-  {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
-  },
-  {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
-  },
-  {
-    title: "The Shining",
-    author: "Radom",
-    pages: 56,
+    title: "The Odin Project",
+    author: "All",
+    pages: 5600,
   },
 ];
 
@@ -77,7 +58,45 @@ function Book(title, author, pages) {
   this.pages = pages;
 }
 
-function addingBook() {
+// function addingBook() {
+//   const newBook = document.createElement("div");
+
+//   const newBookTitle = document.createElement("div");
+//   newBookTitle.classList.add("spine-title");
+//   const newBookAuthor = document.createElement("div");
+//   newBookAuthor.classList.add("spine-author");
+//   const newBookPages = document.createElement("div");
+//   newBookPages.classList.add("spine-pages");
+//   const newBookButtons = document.createElement("div");
+//   newBookButtons.classList.add("delete-btn");
+
+//   newBookTitle.textContent = myLibrary[0].title;
+//   newBookAuthor.textContent = myLibrary[0].author;
+//   newBookPages.textContent = `${myLibrary[0].pages}p`;
+
+//   newBook.append(newBookTitle, newBookPages, newBookAuthor, newBookButtons);
+//   newBook.classList.add("books");
+//   newBook.setAttribute("index", "0");
+//   if (!formBookRead) unreadShelf.insertAdjacentElement("afterbegin", newBook);
+//   if (formBookRead) readShelf.insertAdjacentElement("afterbegin", newBook);
+// }
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formBookTitle = event.currentTarget.title.value;
+  const formBookAuthor = event.currentTarget.author.value;
+  const formBookPages = event.currentTarget.pages.value;
+  const formBookRead = event.currentTarget.read.checked;
+
+  const addbook = new Book(formBookTitle, formBookAuthor, formBookPages);
+  myLibrary.unshift(addbook);
+  // addingBook();
+
+  modal.style.display = "none";
+  event.currentTarget.title.value = "";
+  event.currentTarget.author.value = "";
+  event.currentTarget.pages.value = "";
+
   const newBook = document.createElement("div");
 
   const newBookTitle = document.createElement("div");
@@ -86,30 +105,20 @@ function addingBook() {
   newBookAuthor.classList.add("spine-author");
   const newBookPages = document.createElement("div");
   newBookPages.classList.add("spine-pages");
+  const newBookButtons = document.createElement("div");
+  newBookButtons.classList.add("delete-btn");
 
   newBookTitle.textContent = myLibrary[0].title;
   newBookAuthor.textContent = myLibrary[0].author;
   newBookPages.textContent = `${myLibrary[0].pages}p`;
 
-  newBook.append(newBookTitle, newBookAuthor, newBookPages);
+  newBook.append(newBookTitle, newBookPages, newBookAuthor, newBookButtons);
   newBook.classList.add("books");
-  shelf.insertAdjacentElement("afterbegin", newBook);
-}
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const formBookTitle = event.currentTarget.title.value;
-  console.log(event.currentTarget.title.value);
-  const formBookAuthor = event.currentTarget.author.value;
-  console.log(event.currentTarget.author.value);
+  newBook.setAttribute("index", "0");
 
-  const formBookPages = event.currentTarget.pages.value;
-  console.log(event.currentTarget.pages.value);
-
-  const addbook = new Book(formBookTitle, formBookAuthor, formBookPages);
-  console.log(addbook);
-  myLibrary.unshift(addbook);
-  addingBook();
+  if (!formBookRead) unreadShelf.insertAdjacentElement("afterbegin", newBook);
+  else readShelf.insertAdjacentElement("afterbegin", newBook);
 });
 
 // Fake books in array for landing page
@@ -124,14 +133,16 @@ function addingFakeBeginningBooks() {
     newBookAuthor.classList.add("spine-author");
     const newBookPages = document.createElement("div");
     newBookPages.classList.add("spine-pages");
+    const newBookButtons = document.createElement("div");
+    newBookButtons.classList.add("delete-btn");
 
     newBookTitle.textContent = book.title;
     newBookAuthor.textContent = book.author;
     newBookPages.textContent = `${book.pages}p`;
 
-    newBook.append(newBookTitle, newBookAuthor, newBookPages);
+    newBook.append(newBookTitle, newBookPages, newBookAuthor, newBookButtons);
     newBook.classList.add("books");
-    shelf.insertAdjacentElement("afterbegin", newBook);
+    unreadShelf.insertAdjacentElement("beforeend", newBook);
   });
 }
 

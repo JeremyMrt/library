@@ -6,22 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script
+      src="https://kit.fontawesome.com/8a26389b49.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <script src="app.js" defer></script>
-    <title>Alexandria</title>
+    <title>Library</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="content">
-      <div class="bookshelf">
-        <div class="shelf"></div>
-      </div>
       <div class="text-content">
-        <h1>Library</h1>
-        <button onclick="openModal()">+</button>
+        <div class="text-container">
+          <h1>
+            B<i class="fa-solid fa-eye"></i><i class="fa-solid fa-eye"></i>ks
+          </h1>
+
+          <i
+            class="fa-solid fa-circle-plus"
+            title="Add a book to your library"
+            style="color: green"
+            onclick="openModal()"
+          ></i>
+
+          <p>Your own personal library.</p>
+        </div>
+      </div>
+      <div class="books-content">
+        <div class="shelf">
+          <h2>
+            Those still to be read.<br />
+            What are you waiting for ?
+          </h2>
+          <div class="bookshelf unread"></div>
+        </div>
+        <div class="shelf">
+          <h2>Those you have read... <br />and maybe even enjoyed ?</h2>
+          <div class="bookshelf read"></div>
+        </div>
       </div>
     </div>
 
@@ -37,7 +63,7 @@
               name="title"
               id="title"
               placeholder="The Hobbit"
-              value="test title"
+              value="The Hobbit"
             />
           </div>
           <div class="book-author">
@@ -46,19 +72,23 @@
               type="text"
               name="author"
               id="author"
-              value="test"
               placeholder="J.R.R. Tolkien"
+              value="J.R.R. Tolkien"
             />
           </div>
           <div class="book-pages">
             <label for="pages"># Pages</label>
             <input
               type="number"
-              value="50"
               name="pages"
               id="pages"
               placeholder="354"
+              value="546"
             />
+          </div>
+          <div class="read-checkbox">
+            <label for="read">Have you read it ?</label>
+            <input type="checkbox" id="read" name="read" />
           </div>
           <div class="submit-btn">
             <button type="submit" id="submit">Add</button>
