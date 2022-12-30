@@ -157,14 +157,19 @@ h1 {
   padding: 0;
 }
 
-.fa-eye {
+.logo-dots {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
   color: rgb(7, 97, 7);
   font-size: 9vmax;
-  transition: transform 0.7s ease;
+  vertical-align: middle;
+  transition: transform 0.8s ease;
 }
 
-.fa-eye:hover {
-  transform: scale(1.2);
+.logo-dots:hover {
+  transform: translateY(-30px);
+  cursor: pointer;
 }
 
 .text-content p {
@@ -183,6 +188,11 @@ h1 {
   cursor: pointer;
 }
 
+em {
+  color: rgb(7, 97, 7);
+  font-weight: 700;
+  font-style: normal;
+}
 #modal {
   display: none;
   position: fixed;
