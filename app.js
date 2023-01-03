@@ -32,7 +32,7 @@ const myLibrary = [
   {
     title: "Harry Potter",
     author: "Rowling",
-    read: false,
+    read: true,
     pages: "476",
   },
   {
@@ -56,7 +56,7 @@ const myLibrary = [
   {
     title: "The Odin Project",
     author: "All",
-    read: true,
+    read: false,
     pages: "5600",
   },
 ];
@@ -148,24 +148,12 @@ function updateDataIndexAttributes() {
   }
 }
 
-// working here (if array) :
-Array.from(books).forEach((book) => {
-  book.addEventListener("click", () => {
+document.body.addEventListener("click", (e) => {
+  console.log(e);
+  if (e.target.className === "delete-btn") {
     console.log("test!!");
-    myLibrary.splice(book.getAttribute("index"), 1);
-    book.remove();
+    myLibrary.splice(e.target.getAttribute("index"), 1);
+    e.target.parentElement.remove();
     updateDataIndexAttributes();
-  });
+  }
 });
-
-// for (let book of books) {
-//   book.addEventListener("click", () => {
-//     console.log("test!!");
-//     myLibrary.splice(book.getAttribute("index"), 1);
-
-//     if (book.read) readShelf.removeChild(book);
-//     else unreadShelf.removeChild(book);
-
-//     updateDataIndexAttributes();
-//   });
-// }
