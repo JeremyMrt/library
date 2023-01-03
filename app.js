@@ -23,42 +23,42 @@ window.addEventListener("keydown", (e) => {
 });
 
 const myLibrary = [
-  {
-    title: "The Hobbit",
-    author: "Tolkien",
-    pages: "354",
-    read: true,
-  },
-  {
-    title: "Harry Potter",
-    author: "Rowling",
-    read: true,
-    pages: "476",
-  },
-  {
-    title: "50 shades",
-    author: "James",
-    read: true,
-    pages: "560",
-  },
-  {
-    title: "The Alchemist",
-    author: "Coelho",
-    read: false,
-    pages: "556",
-  },
-  {
-    title: "JS for Dummies",
-    author: "Not a dummy",
-    read: false,
-    pages: "1",
-  },
-  {
-    title: "The Odin Project",
-    author: "All",
-    read: false,
-    pages: "5600",
-  },
+  // {
+  //   title: "The Hobbit",
+  //   author: "Tolkien",
+  //   pages: "354",
+  //   read: true,
+  // },
+  // {
+  //   title: "Harry Potter",
+  //   author: "Rowling",
+  //   read: true,
+  //   pages: "476",
+  // },
+  // {
+  //   title: "50 shades",
+  //   author: "James",
+  //   read: true,
+  //   pages: "560",
+  // },
+  // {
+  //   title: "The Alchemist",
+  //   author: "Coelho",
+  //   read: false,
+  //   pages: "556",
+  // },
+  // {
+  //   title: "JS for Dummies",
+  //   author: "Not a dummy",
+  //   read: false,
+  //   pages: "1",
+  // },
+  // {
+  //   title: "The Odin Project",
+  //   author: "All",
+  //   read: false,
+  //   pages: "5600",
+  // },
 ];
 
 class Book {
@@ -152,7 +152,7 @@ document.body.addEventListener("click", (e) => {
   console.log(e);
   if (e.target.className === "delete-btn") {
     console.log("test!!");
-    myLibrary.splice(e.target.getAttribute("index"), 1);
+    myLibrary.splice(e.target.parentElement.getAttribute("index"), 1);
     e.target.parentElement.remove();
     updateDataIndexAttributes();
   }
