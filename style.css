@@ -296,3 +296,16 @@ em {
   color: white;
   cursor: pointer;
 }
+
+.trashcan {
+  color: rgb(7, 97, 7);
+  font-size: 5rem;
+  margin: 0 auto;
+  margin-bottom: 3vmax;
+  transition: transform 0.8s ease;
+}
+
+.trashcan:hover {
+  transform: rotateZ(-10deg);
+  cursor: pointer;
+}

@@ -1,9 +1,10 @@
+/* eslint-disable prefer-const */
 const modal = document.getElementById("modal");
 const span = document.getElementsByClassName("close")[0];
 const unreadShelf = document.getElementsByClassName("unread")[0];
 const readShelf = document.getElementsByClassName("read")[0];
 const form = document.getElementById("book-form");
-const books = document.getElementsByClassName("books");
+let books = document.getElementsByClassName("books");
 
 // invoked from html
 // eslint-disable-next-line no-unused-vars
@@ -25,32 +26,38 @@ const myLibrary = [
   {
     title: "The Hobbit",
     author: "Tolkien",
-    pages: 354,
+    pages: "354",
+    read: true,
   },
   {
     title: "Harry Potter",
     author: "Rowling",
-    pages: 476,
+    read: false,
+    pages: "476",
   },
   {
     title: "50 shades",
     author: "James",
-    pages: 560,
+    read: true,
+    pages: "560",
   },
   {
     title: "The Alchemist",
     author: "Coelho",
-    pages: 556,
+    read: false,
+    pages: "556",
   },
   {
     title: "JS for Dummies",
     author: "Not a dummy",
-    pages: 1,
+    read: false,
+    pages: "1",
   },
   {
     title: "The Odin Project",
     author: "All",
-    pages: 5600,
+    read: true,
+    pages: "5600",
   },
 ];
 
@@ -83,8 +90,8 @@ class Book {
 
     bookDiv.setAttribute("index", myLibrary.length - 1);
 
-    if (!this.read) unreadShelf.appendChild(bookDiv);
-    else readShelf.appendChild(bookDiv);
+    if (this.read) readShelf.appendChild(bookDiv);
+    else unreadShelf.appendChild(bookDiv);
   }
 }
 
@@ -128,45 +135,37 @@ function addingFakeBeginningBooks() {
 
     bookDiv.setAttribute("index", myLibrary.indexOf(book));
 
-    unreadShelf.appendChild(bookDiv);
+    if (book.read) readShelf.appendChild(bookDiv);
+    else unreadShelf.appendChild(bookDiv);
   });
 }
 
 addingFakeBeginningBooks();
 
-// if (books[0] !== undefined) {
-//   for (let i = 0; i <= books.length; i++) {
-//     const book = books[i];
-//     book.addEventListener("click", () => {
-//       myLibrary.splice(i, 1);
-//       bookshelf.removeChild(books[i]);
-//     });
-//   }
-// }
-
-// OK FOR NOW
-// Array.from(books).forEach((book) => {
-//   book.addEventListener("click", () => {
-//     myLibrary.splice(book.dataset.index, 1);
-
-//     if (book.read) readShelf.removeChild(book);
-//     else unreadShelf.removeChild(book);
-//   });
-// });
 function updateDataIndexAttributes() {
   for (let i = 0; i < books.length; i++) {
-    books[i].setAttribute("index", i++);
+    books[i].setAttribute("index", i);
   }
 }
 
+// working here (if array) :
 Array.from(books).forEach((book) => {
   book.addEventListener("click", () => {
-    console.log(book.getAttribute("index"));
+    console.log("test!!");
     myLibrary.splice(book.getAttribute("index"), 1);
-
-    if (book.read) readShelf.removeChild(book);
-    else unreadShelf.removeChild(book);
-
+    book.remove();
     updateDataIndexAttributes();
   });
 });
+
+// for (let book of books) {
+//   book.addEventListener("click", () => {
+//     console.log("test!!");
+//     myLibrary.splice(book.getAttribute("index"), 1);
+
+//     if (book.read) readShelf.removeChild(book);
+//     else unreadShelf.removeChild(book);
+
+//     updateDataIndexAttributes();
+//   });
+// }
