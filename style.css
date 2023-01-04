@@ -526,3 +526,11 @@ em {
 .draggable.dragging {
   opacity: 0.5;
 }
+
+.draggable.dragging .read-btn::before {
+  display: none;
+}
+
+.draggable.dragging .delete-btn::before {
+  display: none;
+}

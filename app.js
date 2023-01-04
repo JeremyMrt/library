@@ -277,7 +277,6 @@ booksContent.addEventListener("click", (e) => {
 // Drag and Drop from WDS
 Array.from(books).forEach((book) => {
   book.addEventListener("dragstart", () => {
-    console.log("dragging");
     book.classList.add("dragging");
   });
 
@@ -289,8 +288,35 @@ Array.from(books).forEach((book) => {
 bookshelves.forEach((bookshelf) => {
   bookshelf.addEventListener("dragover", (e) => {
     e.preventDefault();
+    const afterElement = getDragAfterElement(bookshelf, e.clientX);
     const draggable = document.querySelector(".dragging");
-    bookshelf.appendChild(draggable);
-    updateDataIndexAttributes();
+    if (afterElement !== null) {
+      bookshelf.insertBefore(draggable, afterElement);
+    } else {
+      bookshelf.appendChild(draggable);
+    }
   });
 });
+
+function getDragAfterElement(bookshelf, x) {
+  const draggableElements = [
+    ...bookshelf.querySelectorAll(".draggable:not(.dragging)"),
+  ];
+
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = x - box.left - box.width / 2;
+      if (offset < 0 && offset > closest.offset) {
+        // eslint-disable-next-line object-shorthand
+        return { offset: offset, element: child };
+        // eslint-disable-next-line no-else-return
+      } else {
+        return closest;
+      }
+    },
+    {
+      offset: Number.NEGATIVE_INFINITY,
+    }
+  ).element;
+}
