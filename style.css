@@ -520,3 +520,9 @@ em {
   transform: rotateZ(-10deg);
   cursor: pointer;
 }
+
+/* Drag And Drop */
+
+.draggable.dragging {
+  opacity: 0.5;
+}

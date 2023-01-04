@@ -3,6 +3,8 @@ const modal = document.getElementById("modal");
 const booksContent = document.getElementsByClassName("books-content")[0];
 const closeModal = document.getElementsByClassName("close")[0];
 const unreadShelf = document.getElementsByClassName("unread")[0];
+const bookshelves = document.querySelectorAll(".bookshelf");
+let draggables = document.querySelectorAll(".draggable");
 const readShelf = document.getElementsByClassName("read")[0];
 const form = document.getElementById("book-form");
 let books = document.getElementsByClassName("books");
@@ -137,6 +139,7 @@ class Book {
     const bookDivReadButton = document.createElement("div");
 
     bookDiv.classList.add("books");
+    bookDiv.classList.add("draggable");
     bookDivTitle.classList.add("spine-title");
     bookDivAuthor.classList.add("spine-author");
     bookDivPages.classList.add("spine-pages");
@@ -157,6 +160,7 @@ class Book {
 
     // Code logic doesn't need the index anymore but I leave it. Using it might be closer to what the exercice was supposed to teach...
     bookDiv.setAttribute("index", myLibrary.length - 1);
+    bookDiv.setAttribute("draggable", true);
 
     let randomHeight = getBookHeight(300, 360);
     bookDiv.style.height = `${randomHeight}px`;
@@ -197,6 +201,7 @@ function addingFakeBeginningBooks() {
     const bookDivReadButton = document.createElement("div");
 
     bookDiv.classList.add("books");
+    bookDiv.classList.add("draggable");
     bookDivTitle.classList.add("spine-title");
     bookDivAuthor.classList.add("spine-author");
     bookDivPages.classList.add("spine-pages");
@@ -216,6 +221,7 @@ function addingFakeBeginningBooks() {
     );
 
     bookDiv.setAttribute("index", myLibrary.indexOf(book));
+    bookDiv.setAttribute("draggable", true);
 
     let randomHeight = getBookHeight(31, 38);
     bookDiv.style.height = `${randomHeight}vh`;
@@ -266,4 +272,25 @@ booksContent.addEventListener("click", (e) => {
     readShelf.appendChild(e.target.parentElement);
     updateDataIndexAttributes();
   }
+});
+
+// Drag and Drop from WDS
+Array.from(books).forEach((book) => {
+  book.addEventListener("dragstart", () => {
+    console.log("dragging");
+    book.classList.add("dragging");
+  });
+
+  book.addEventListener("dragend", () => {
+    book.classList.remove("dragging");
+  });
+});
+
+bookshelves.forEach((bookshelf) => {
+  bookshelf.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    const draggable = document.querySelector(".dragging");
+    bookshelf.appendChild(draggable);
+    updateDataIndexAttributes();
+  });
 });
