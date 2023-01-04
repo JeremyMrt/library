@@ -6,6 +6,7 @@ const unreadShelf = document.getElementsByClassName("unread")[0];
 const readShelf = document.getElementsByClassName("read")[0];
 const form = document.getElementById("book-form");
 let books = document.getElementsByClassName("books");
+
 const bookColors = [
   "#4d4b30",
   "#7e846e",
@@ -117,7 +118,6 @@ function getRootCssStyles(rootRule = ":root") {
   });
   return cssVars;
 }
-
 let availableBackground = getRootCssStyles();
 
 class Book {
@@ -155,6 +155,7 @@ class Book {
       bookDivReadButton
     );
 
+    // Code logic doesn't need the index anymore but I leave it. Using it might be closer to what the exercice was supposed to teach...
     bookDiv.setAttribute("index", myLibrary.length - 1);
 
     let randomHeight = getBookHeight(300, 360);
@@ -216,8 +217,8 @@ function addingFakeBeginningBooks() {
 
     bookDiv.setAttribute("index", myLibrary.indexOf(book));
 
-    let randomHeight = getBookHeight(300, 360);
-    bookDiv.style.height = `${randomHeight}px`;
+    let randomHeight = getBookHeight(31, 38);
+    bookDiv.style.height = `${randomHeight}vh`;
     let randomBackground = randomChoice(availableBackground);
     bookDiv.style.background = `var(${randomBackground})`;
     let randomColor = randomChoice(bookColors);

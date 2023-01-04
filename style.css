@@ -221,6 +221,7 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: "poppinsmedium", sans-serif;
+  overflow: scroll;
 }
 
 .icon::before {
@@ -362,7 +363,7 @@ body {
 h1 {
   font-weight: 700;
   font-family: "poppinsbold", sans-serif;
-  font-size: 10vmax;
+  font-size: clamp(3rem, 1.5974rem + 6.2338vw, 9rem);
   letter-spacing: -8px;
   padding: 0;
 }
@@ -372,7 +373,7 @@ h1 {
   align-items: flex-start;
   justify-content: center;
   color: var(--clr-main);
-  font-size: 9vmax;
+  font-size: clamp(3rem, 1.5974rem + 6.2338vw, 9rem);
   vertical-align: middle;
   transition: transform 0.8s ease;
 }
