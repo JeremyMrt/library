@@ -295,14 +295,25 @@ body {
   text-shadow: none;
   margin: 0;
   position: absolute;
-  position: absolute;
   bottom: -20px;
   right: -20px;
   font-size: 2rem;
   z-index: 2;
   transition: transform 0.4s ease;
 }
-.delete-btn:hover {
+
+.read-btn {
+  text-shadow: none;
+  margin: 0;
+  position: absolute;
+  font-size: 2rem;
+  z-index: 2;
+  transition: transform 0.4s ease;
+  top: -38px;
+}
+
+.delete-btn:hover,
+.read-btn:hover {
   transform: scale(1.2);
   cursor: pointer;
 }
@@ -312,10 +323,27 @@ body {
   content: "\f056";
   color: rgba(141, 8, 8, 0.219);
   transition: color 0.4s ease;
+  z-index: 2;
 }
 
-.delete-btn:hover::before {
+.read-btn::before {
+  font: var(--fa-font-solid);
+  content: "\f5da";
+  color: rgba(141, 8, 8, 0.219);
+  z-index: 2;
+  transition: color 0.4s ease;
+}
+
+.read .read-btn::before {
+  color: rgba(0, 128, 0, 0.219);
+}
+
+.delete-btn:hover::before,
+.read-btn:hover::before {
   color: rgb(141, 8, 8);
+}
+.read .read-btn:hover::before {
+  color: var(--clr-main);
 }
 
 .text-content {

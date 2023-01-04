@@ -133,19 +133,27 @@ class Book {
     const bookDivTitle = document.createElement("div");
     const bookDivAuthor = document.createElement("div");
     const bookDivPages = document.createElement("div");
-    const bookDivButtons = document.createElement("div");
+    const bookDivDeleteButton = document.createElement("div");
+    const bookDivReadButton = document.createElement("div");
 
     bookDiv.classList.add("books");
     bookDivTitle.classList.add("spine-title");
     bookDivAuthor.classList.add("spine-author");
     bookDivPages.classList.add("spine-pages");
-    bookDivButtons.classList.add("delete-btn");
+    bookDivDeleteButton.classList.add("delete-btn");
+    bookDivReadButton.classList.add("read-btn");
 
     bookDivTitle.textContent = this.title;
     bookDivAuthor.textContent = this.author;
     bookDivPages.textContent = `${this.pages}p`;
 
-    bookDiv.append(bookDivTitle, bookDivPages, bookDivAuthor, bookDivButtons);
+    bookDiv.append(
+      bookDivTitle,
+      bookDivPages,
+      bookDivAuthor,
+      bookDivDeleteButton,
+      bookDivReadButton
+    );
 
     bookDiv.setAttribute("index", myLibrary.length - 1);
 
@@ -229,9 +237,14 @@ function updateDataIndexAttributes() {
 }
 
 booksContent.addEventListener("click", (e) => {
-  console.log(e);
   if (e.target.className === "delete-btn") {
-    myLibrary.splice(e.target.parentElement.getAttribute("index"), 1);
+    myLibrary.splice(
+      myLibrary.findIndex(
+        (object) =>
+          object.title === e.target.parentElement.firstElementChild.outerText
+      ),
+      1
+    );
     e.target.parentElement.remove();
     updateDataIndexAttributes();
   }
@@ -239,9 +252,17 @@ booksContent.addEventListener("click", (e) => {
 
 booksContent.addEventListener("click", (e) => {
   console.log(e);
-  if (e.target.className === "read-btn") {
-    myLibrary.splice(e.target.parentElement.getAttribute("index"), 1);
-    e.target.parentElement.remove();
+  if (
+    e.target.className === "read-btn" &&
+    e.target.parentElement.parentElement.className === "bookshelf read"
+  ) {
+    unreadShelf.appendChild(e.target.parentElement);
+    updateDataIndexAttributes();
+  } else if (
+    e.target.className === "read-btn" &&
+    e.target.parentElement.parentElement.className === "bookshelf unread"
+  ) {
+    readShelf.appendChild(e.target.parentElement);
     updateDataIndexAttributes();
   }
 });
