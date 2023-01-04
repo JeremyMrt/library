@@ -6,7 +6,34 @@ const unreadShelf = document.getElementsByClassName("unread")[0];
 const readShelf = document.getElementsByClassName("read")[0];
 const form = document.getElementById("book-form");
 let books = document.getElementsByClassName("books");
-
+const bookColors = [
+  "#4d4b30",
+  "#7e846e",
+  "#919478",
+  "#9da584",
+  "#a5b297",
+  "#444929",
+  "#737148",
+  "#767933",
+  "#7f822e",
+  "#808000",
+  "#597161",
+  "#556246",
+  "#89815d",
+  "#8b8762",
+  "#ada87a",
+  "#482217",
+  "#572c14",
+  "#a8693f",
+  "#8b5a26",
+  "#b77332",
+  "#1a1a43",
+  "#201321",
+  "#5b4c5f",
+  "#4e2F08",
+  "#8f673d",
+  "#8d775c",
+];
 const myLibrary = [
   {
     title: "The Hobbit",
@@ -126,8 +153,8 @@ class Book {
     bookDiv.style.height = `${randomHeight}px`;
     let randomBackground = randomChoice(availableBackground);
     bookDiv.style.background = `var(${randomBackground})`;
-    let randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    bookDiv.style.backgroundColor = `#${randomColor}`;
+    let randomColor = randomChoice(bookColors);
+    bookDiv.style.backgroundColor = randomColor;
 
     if (this.read) readShelf.appendChild(bookDiv);
     else unreadShelf.appendChild(bookDiv);
@@ -157,19 +184,27 @@ function addingFakeBeginningBooks() {
     const bookDivTitle = document.createElement("div");
     const bookDivAuthor = document.createElement("div");
     const bookDivPages = document.createElement("div");
-    const bookDivButtons = document.createElement("div");
+    const bookDivDeleteButton = document.createElement("div");
+    const bookDivReadButton = document.createElement("div");
 
     bookDiv.classList.add("books");
     bookDivTitle.classList.add("spine-title");
     bookDivAuthor.classList.add("spine-author");
     bookDivPages.classList.add("spine-pages");
-    bookDivButtons.classList.add("delete-btn");
+    bookDivDeleteButton.classList.add("delete-btn");
+    bookDivReadButton.classList.add("read-btn");
 
     bookDivTitle.textContent = book.title;
     bookDivAuthor.textContent = book.author;
     bookDivPages.textContent = `${book.pages}p`;
 
-    bookDiv.append(bookDivTitle, bookDivPages, bookDivAuthor, bookDivButtons);
+    bookDiv.append(
+      bookDivTitle,
+      bookDivPages,
+      bookDivAuthor,
+      bookDivDeleteButton,
+      bookDivReadButton
+    );
 
     bookDiv.setAttribute("index", myLibrary.indexOf(book));
 
@@ -177,8 +212,8 @@ function addingFakeBeginningBooks() {
     bookDiv.style.height = `${randomHeight}px`;
     let randomBackground = randomChoice(availableBackground);
     bookDiv.style.background = `var(${randomBackground})`;
-    let randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    bookDiv.style.backgroundColor = `#${randomColor}`;
+    let randomColor = randomChoice(bookColors);
+    bookDiv.style.backgroundColor = randomColor;
 
     if (book.read) readShelf.appendChild(bookDiv);
     else unreadShelf.appendChild(bookDiv);
@@ -196,6 +231,15 @@ function updateDataIndexAttributes() {
 booksContent.addEventListener("click", (e) => {
   console.log(e);
   if (e.target.className === "delete-btn") {
+    myLibrary.splice(e.target.parentElement.getAttribute("index"), 1);
+    e.target.parentElement.remove();
+    updateDataIndexAttributes();
+  }
+});
+
+booksContent.addEventListener("click", (e) => {
+  console.log(e);
+  if (e.target.className === "read-btn") {
     myLibrary.splice(e.target.parentElement.getAttribute("index"), 1);
     e.target.parentElement.remove();
     updateDataIndexAttributes();
