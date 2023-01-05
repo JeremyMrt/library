@@ -6,7 +6,6 @@ const unreadShelf = document.getElementsByClassName("unread")[0];
 const bookshelves = document.querySelectorAll(".bookshelf");
 const readShelf = document.getElementsByClassName("read")[0];
 const trashcan = document.getElementsByClassName("fa-trash-can")[0];
-const trashcanContainer = document.getElementById("trashcan");
 const form = document.getElementById("book-form");
 let books = document.getElementsByClassName("books");
 
