@@ -258,7 +258,6 @@ booksContent.addEventListener("click", (e) => {
 });
 
 booksContent.addEventListener("click", (e) => {
-  console.log(e);
   if (
     e.target.className === "read-btn" &&
     e.target.parentElement.parentElement.className === "bookshelf read"
@@ -275,13 +274,11 @@ booksContent.addEventListener("click", (e) => {
 });
 
 // Drag and Drop from WDS
-Array.from(books).forEach((book) => {
-  book.addEventListener("dragstart", () => {
-    book.classList.add("dragging");
-  });
+booksContent.addEventListener("dragstart", (e) => {
+  e.target.classList.add("dragging");
 
-  book.addEventListener("dragend", () => {
-    book.classList.remove("dragging");
+  e.target.addEventListener("dragend", () => {
+    e.target.classList.remove("dragging");
   });
 });
 

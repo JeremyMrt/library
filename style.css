@@ -263,6 +263,8 @@ body {
 .bookshelf {
   display: flex;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   align-items: flex-end;
   flex-wrap: wrap;
   gap: 5px;
