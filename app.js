@@ -4,8 +4,9 @@ const booksContent = document.getElementsByClassName("books-content")[0];
 const closeModal = document.getElementsByClassName("close")[0];
 const unreadShelf = document.getElementsByClassName("unread")[0];
 const bookshelves = document.querySelectorAll(".bookshelf");
-let draggables = document.querySelectorAll(".draggable");
 const readShelf = document.getElementsByClassName("read")[0];
+const trashcan = document.getElementsByClassName("fa-trash-can")[0];
+const trashcanContainer = document.getElementById("trashcan");
 const form = document.getElementById("book-form");
 let books = document.getElementsByClassName("books");
 
@@ -247,8 +248,8 @@ booksContent.addEventListener("click", (e) => {
   if (e.target.className === "delete-btn") {
     myLibrary.splice(
       myLibrary.findIndex(
-        (object) =>
-          object.title === e.target.parentElement.firstElementChild.outerText
+        (book) =>
+          book.title === e.target.parentElement.firstElementChild.outerText
       ),
       1
     );
@@ -305,15 +306,29 @@ function getDragAfterElement(bookshelf, x) {
       const box = child.getBoundingClientRect();
       const offset = x - box.left - box.width / 2;
       if (offset < 0 && offset > closest.offset) {
-        // eslint-disable-next-line object-shorthand
-        return { offset: offset, element: child };
-        // eslint-disable-next-line no-else-return
-      } else {
-        return closest;
+        return { offset, element: child };
       }
+      return closest;
     },
     {
       offset: Number.NEGATIVE_INFINITY,
     }
   ).element;
 }
+
+trashcan.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  trashcan.style.fontSize = "7rem";
+  const draggable = document.querySelector(".dragging");
+  console.log(draggable.firstElementChild.outerText);
+  trashcan.addEventListener("drop", () => {
+    myLibrary.splice(
+      myLibrary.findIndex(
+        (book) => book.title === draggable.firstElementChild.outerText
+      ),
+      1
+    );
+    draggable.remove();
+    trashcan.style.fontSize = "5rem";
+  });
+});

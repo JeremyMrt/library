@@ -258,6 +258,7 @@ body {
   text-align: center;
   font-weight: 400;
   margin-bottom: 50px;
+  font-size: clamp(1.1rem, 1.3299rem + 0.3117vw, 1.7rem);
 }
 
 .bookshelf {
@@ -357,6 +358,7 @@ body {
 .text-container {
   width: 80%;
   margin: 0 auto;
+  padding: 20px 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -365,8 +367,8 @@ body {
 h1 {
   font-weight: 700;
   font-family: "poppinsbold", sans-serif;
-  font-size: clamp(3rem, 1.5974rem + 6.2338vw, 9rem);
-  letter-spacing: -8px;
+  font-size: clamp(3rem, 2.2987rem + 3.1169vw, 6rem);
+  letter-spacing: -5px;
   padding: 0;
 }
 
@@ -375,7 +377,7 @@ h1 {
   align-items: flex-start;
   justify-content: center;
   color: var(--clr-main);
-  font-size: clamp(3rem, 1.5974rem + 6.2338vw, 9rem);
+  font-size: clamp(3rem, 2.2987rem + 3.1169vw, 6rem);
   vertical-align: middle;
   transition: transform 0.8s ease;
 }
@@ -386,13 +388,13 @@ h1 {
 }
 
 .text-content p {
-  font-size: 2vmax;
+  font-size: clamp(0.7rem, 0.5325rem + 2.0779vw, 2.7rem);
   font-weight: 400;
   padding-top: 20px;
 }
 
 .text-content .fa-circle-plus {
-  font-size: 7vmax;
+  font-size: clamp(3rem, 2.2987rem + 3.1169vw, 6rem);
   transition: transform 1s ease;
 }
 
@@ -510,16 +512,21 @@ em {
   cursor: pointer;
 }
 
-.trashcan {
+#trashcan {
   color: var(--clr-main);
   font-size: 5rem;
-  margin: 0 auto;
+  width: 100%;
   margin-bottom: 3vmax;
   transition: transform 0.8s ease;
+  display: flex;
 }
 
-.trashcan:hover {
-  transform: rotateZ(-10deg);
+.fa-trash-can {
+  margin: 0 auto;
+}
+
+#trashcan:hover {
+  /* transform: rotateZ(-10deg); */
   cursor: pointer;
 }
 
@@ -535,4 +542,29 @@ em {
 
 .draggable.dragging .delete-btn::before {
   display: none;
+}
+
+@media (width<=850px) {
+  .text-container p {
+    display: none;
+  }
+
+  .text-container h1 {
+    letter-spacing: normal;
+  }
+
+  .books-content {
+    flex-direction: column;
+    margin: 50px auto;
+    gap: 50px;
+    height: fit-content;
+  }
+
+  #trashcan {
+    margin-top: 30px;
+  }
+
+  .bookshelf {
+    row-gap: 10vh;
+  }
 }
