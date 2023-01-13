@@ -274,6 +274,7 @@ booksContent.addEventListener("click", (e) => {
 });
 
 // Drag and Drop from WDS
+
 booksContent.addEventListener("dragstart", (e) => {
   e.target.classList.add("dragging");
 

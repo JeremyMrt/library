@@ -546,6 +546,7 @@ em {
 @media (width<=850px) {
   body {
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   .text-container p {
     display: none;
